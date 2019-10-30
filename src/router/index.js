@@ -9,12 +9,12 @@ const routes = [
     name: "home",
     component: () => import(/*webpackChunkName: "home" */ "../views/Home.vue")
   },
-  {
-    path: "/header",
-    name: "header",
-    component: () =>
-      import(/*webpackChunkName: "header" */ "../components/Header.vue")
-  },
+  // {
+  //   path: "/header",
+  //   name: "header",
+  //   component: () =>
+  //     import(/*webpackChunkName: "header" */ "../components/Header.vue")
+  // },
   {
     path: "/portfolio",
     name: "portfolio",
