@@ -1,9 +1,21 @@
 <template>
-  <h1>Home</h1>
+  <div>
+    <h1>Trade or View your Portfolio</h1>
+    <h6>You may Save and Load your Data</h6>
+    <h6>Click on 'End Day' to begin a new day!</h6>
+    <hr />
+    <p>Your Funds : {{ funds | currency }}</p>
+  </div>
 </template>
 
 <script>
 // @ is an alias to /src
 
-export default {};
+export default {
+  computed: {
+    funds() {
+      return this.$store.getters.funds;
+    }
+  }
+};
 </script>

@@ -24,7 +24,7 @@
       </ul>
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a href="#" class="nav-link">End Day</a>
+          <a href="#" @click="endDay" class="nav-link">End Day</a>
         </li>
         <li class="nav-item dropdown">
           <a
@@ -44,6 +44,7 @@
           </div>
         </li>
       </ul>
+      <strong class="navbar-text">Funds: {{ funds | currency }}</strong>
       <!-- <form class="form-inline my-2 my-lg-0">
         <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" />
         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
@@ -51,3 +52,20 @@
     </div>
   </nav>
 </template>
+
+<script>
+import { mapActions } from "vuex";
+export default {
+  computed: {
+    funds() {
+      return this.$store.getters.funds;
+    }
+  },
+  methods: {
+    ...mapActions(["randomizeStocks"]),
+    endDay() {
+      this.randomizeStocks();
+    }
+  }
+};
+</script>
