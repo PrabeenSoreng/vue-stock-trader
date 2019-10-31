@@ -37,8 +37,8 @@
             aria-expanded="false"
           >Dropdown</a>
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="#">Save Data</a>
-            <a class="dropdown-item" href="#">Load Data</a>
+            <a class="dropdown-item" href="#" @click="saveData">Save Data</a>
+            <a class="dropdown-item" href="#" @click="loadData">Load Data</a>
             <!-- <div class="dropdown-divider"></div>
             <a class="dropdown-item" href="#">Something else here</a>-->
           </div>
@@ -55,16 +55,38 @@
 
 <script>
 import { mapActions } from "vuex";
+import axios from "axios";
+
 export default {
+  data() {
+    return {};
+  },
   computed: {
     funds() {
       return this.$store.getters.funds;
     }
   },
   methods: {
-    ...mapActions(["randomizeStocks"]),
+    ...mapActions({
+      randomizeStocks: "randomizeStocks",
+      fetchData: "loadData"
+    }),
     endDay() {
       this.randomizeStocks();
+    },
+    saveData() {
+      const data = {
+        funds: this.$store.getters.funds,
+        stockPortfolio: this.$store.getters.stockPortfolio,
+        stocks: this.$store.getters.stocks
+      };
+      axios.put(
+        "https://vue-stock-trader-6e7e8.firebaseio.com/data.json",
+        data
+      );
+    },
+    loadData() {
+      this.fetchData();
     }
   }
 };
